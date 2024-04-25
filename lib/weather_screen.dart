@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -31,6 +34,7 @@ class WeatherScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // main card
             SizedBox(
@@ -83,8 +87,60 @@ class WeatherScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
+            ),
+            const Text(
+              "Weather Forest",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 100,
+                  child: Card(
+                    elevation: 6,
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          12,
+                        ),
+                      ),
+                      child: const Column(
+                        children: [
+                          Text(
+                            "03:03",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Icon(
+                            Icons.cloud,
+                            size: 32,
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            "320.12",
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             // weather forecast cards
             Placeholder(
