@@ -98,7 +98,7 @@ class WeatherScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 16,
             ),
             Row(
               children: [
@@ -107,6 +107,7 @@ class WeatherScreen extends StatelessWidget {
                   child: Card(
                     elevation: 6,
                     child: Container(
+                      width: 100,
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
