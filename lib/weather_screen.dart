@@ -105,11 +105,31 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  HourlyForecastItem(),
-                  HourlyForecastItem(),
-                  HourlyForecastItem(),
-                  HourlyForecastItem(),
-                  HourlyForecastItem()
+                  HourlyForecastItem(
+                    time: "00:00",
+                    icon: Icons.cloud,
+                    temperature: "320.12",
+                  ),
+                  HourlyForecastItem(
+                    time: "01:00",
+                    icon: Icons.sunny,
+                    temperature: "275.12",
+                  ),
+                  HourlyForecastItem(
+                    time: "02:00",
+                    icon: Icons.cloud,
+                    temperature: "320.12",
+                  ),
+                  HourlyForecastItem(
+                    time: "03:03",
+                    icon: Icons.cloud,
+                    temperature: "320.12",
+                  ),
+                  HourlyForecastItem(
+                    time: "03:03",
+                    icon: Icons.cloud,
+                    temperature: "320.12",
+                  )
                 ],
               ),
             ),
