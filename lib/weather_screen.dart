@@ -127,48 +127,8 @@ class WeatherScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AdditionalInformation(),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.water_drop,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "Wind Speed",
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "7.67",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(
-                      Icons.water,
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "Pressure",
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "1006",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                )
+                AdditionalInformation(),
+                AdditionalInformation(),
               ],
             )
             // weather forecast cards
