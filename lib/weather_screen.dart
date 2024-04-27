@@ -81,13 +81,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
             );
           }
           final data = snapShot.data!;
-          final Map<String, dynamic> currentWeatherData = data["list"][0];
-          final double currentTemp = currentWeatherData["main"]["temp"];
-          final String currentSky = currentWeatherData["weather"][0]["main"];
-          final int currentPressure = currentWeatherData["main"]["pressure"];
-          final int currentHumidity = currentWeatherData["main"]["humidity"];
-          final double currentWind = currentWeatherData["wind"]["speed"];
-          final List<dynamic> hourlyForecasts = data["list"];
+          final currentWeatherData = data["list"][0];
+          final  currentTemp = currentWeatherData["main"]["temp"];
+          final  currentSky = currentWeatherData["weather"][0]["main"];
+          final  currentPressure = currentWeatherData["main"]["pressure"];
+          final  currentHumidity = currentWeatherData["main"]["humidity"];
+          final  currentWind = currentWeatherData["wind"]["speed"];
+          final  hourlyForecasts = data["list"];
 
           return Padding(
             padding: const EdgeInsets.all(16),
