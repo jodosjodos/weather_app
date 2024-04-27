@@ -78,7 +78,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final data = snapShot.data!;
           final currentWeatherData = data["list"][0];
           final double currentTemp = currentWeatherData["main"]["temp"];
-          final currentSky = currentWeatherData["weather"][0]["main"];
+          final String currentSky = currentWeatherData["weather"][0]["main"];
+          final int currentPressure = currentWeatherData["main"]["pressure"];
+          final int currentHumidity = currentWeatherData["main"]["humidity"];
+          final double currentWind = currentWeatherData["wind"]["speed"];
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -191,23 +194,23 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     fontSize: 24,
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     AdditionalInformation(
                       icon: Icons.water_drop,
                       label: "Humidity",
-                      value: "91",
+                      value: currentHumidity.toString(),
                     ),
                     AdditionalInformation(
                       icon: Icons.air,
                       label: "Wind",
-                      value: "7.5",
+                      value: currentWind.toString(),
                     ),
                     AdditionalInformation(
                       icon: Icons.beach_access,
                       label: "Pressure",
-                      value: "1000",
+                      value: currentPressure.toString(),
                     ),
                   ],
                 )
