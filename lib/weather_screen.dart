@@ -20,6 +20,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
+      // city to  get weather
       String cityName = "London";
       final res = await http.get(
         Uri.parse(
@@ -82,12 +83,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
           }
           final data = snapShot.data!;
           final currentWeatherData = data["list"][0];
-          final  currentTemp = currentWeatherData["main"]["temp"];
-          final  currentSky = currentWeatherData["weather"][0]["main"];
-          final  currentPressure = currentWeatherData["main"]["pressure"];
-          final  currentHumidity = currentWeatherData["main"]["humidity"];
-          final  currentWind = currentWeatherData["wind"]["speed"];
-          final  hourlyForecasts = data["list"];
+          final currentTemp = currentWeatherData["main"]["temp"];
+          final currentSky = currentWeatherData["weather"][0]["main"];
+          final currentPressure = currentWeatherData["main"]["pressure"];
+          final currentHumidity = currentWeatherData["main"]["humidity"];
+          final currentWind = currentWeatherData["wind"]["speed"];
+          final hourlyForecasts = data["list"];
 
           return Padding(
             padding: const EdgeInsets.all(16),
