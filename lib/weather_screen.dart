@@ -1,15 +1,20 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:weather_app/additional_information_item.dart';
 import 'package:weather_app/weather_forecast_item.dart';
+import 'package:http/http.dart' as http;
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+  Future getCurrentWeather() async {
+    String cityName = "London";
+    http.get(
+      Uri.parse(
+        "http://api.openweathermap.org/data/2.5/weather?q=$cityName&APPID=5e5e7241093f170e8e766240ac119f89",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +121,7 @@ class WeatherScreen extends StatelessWidget {
                     temperature: "275.12",
                   ),
                   HourlyForecastItem(
-                    time: "02:00", 
+                    time: "02:00",
                     icon: Icons.cloud,
                     temperature: "320.12",
                   ),
@@ -170,3 +175,4 @@ class WeatherScreen extends StatelessWidget {
     );
   }
 }
+  
