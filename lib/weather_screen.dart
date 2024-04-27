@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/additional_information_item.dart';
 import 'package:weather_app/secrets.dart';
 import 'package:weather_app/weather_forecast_item.dart';
@@ -185,12 +186,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           hourlyForecasts[index + 1]["weather"][0]["main"];
                       final hourlyTemp =
                           hourlyForecasts[index + 1]["main"]["temp"].toString();
+                      final time =
+                          DateTime.parse(hourlyForecast["dt_txt"].toString());
                       return HourlyForecastItem(
-                          icon: hourlySky == "Clouds" || currentSky == "Rain"
-                              ? Icons.cloud
-                              : Icons.sunny,
-                          temperature: hourlyTemp,
-                          time: hourlyForecast["dt"].toString());
+                        icon: hourlySky == "Clouds" || currentSky == "Rain"
+                            ? Icons.cloud
+                            : Icons.sunny,
+                        temperature: hourlyTemp,
+                        time: DateFormat.j().format(time),
+                      );
                     },
                   ),
                 ),
