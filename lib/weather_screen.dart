@@ -82,6 +82,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final int currentPressure = currentWeatherData["main"]["pressure"];
           final int currentHumidity = currentWeatherData["main"]["humidity"];
           final double currentWind = currentWeatherData["wind"]["speed"];
+          final hourlyForecasts = data["list"];
+
           return Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -145,42 +147,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 20,
                 ),
                 const Text(
-                  "Weather Forecast",
+                  "Hourly Forecast",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
 
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      HourlyForecastItem(
-                        time: "00:00",
-                        icon: Icons.cloud,
-                        temperature: "320.12",
-                      ),
-                      HourlyForecastItem(
-                        time: "01:00",
-                        icon: Icons.sunny,
-                        temperature: "275.12",
-                      ),
-                      HourlyForecastItem(
-                        time: "02:00",
-                        icon: Icons.cloud,
-                        temperature: "320.12",
-                      ),
-                      HourlyForecastItem(
-                        time: "03:03",
-                        icon: Icons.cloud,
-                        temperature: "320.12",
-                      ),
-                      HourlyForecastItem(
-                        time: "03:03",
-                        icon: Icons.cloud,
-                        temperature: "320.12",
-                      )
+                      for (int i = 0; i < 5; i++)
+                        HourlyForecastItem(
+                          icon: hourlyForecasts[i]["weather"][0]["main"] ==
+                                      "Clouds" ||
+                                  currentSky == "Rain"
+                              ? Icons.cloud
+                              : Icons.sunny,
+                          temperature:
+                              hourlyForecasts[i]["main"]["temp"].toString(),
+                          time: hourlyForecasts[i]["dt_txt"]
+                              .split(" ")[1]
+                              .toString(),
+                        )
                     ],
                   ),
                 ),
