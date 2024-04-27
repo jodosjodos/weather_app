@@ -76,13 +76,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
             );
           }
           final data = snapShot.data!;
-          final currentWeatherData = data["list"][0];
+          final Map<String, dynamic> currentWeatherData = data["list"][0];
           final double currentTemp = currentWeatherData["main"]["temp"];
           final String currentSky = currentWeatherData["weather"][0]["main"];
           final int currentPressure = currentWeatherData["main"]["pressure"];
           final int currentHumidity = currentWeatherData["main"]["humidity"];
           final double currentWind = currentWeatherData["wind"]["speed"];
-          final hourlyForecasts = data["list"];
+          final List<dynamic> hourlyForecasts = data["list"];
 
           return Padding(
             padding: const EdgeInsets.all(16),
@@ -154,24 +154,44 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   ),
                 ),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 5; i++)
-                        HourlyForecastItem(
-                          icon: hourlyForecasts[i]["weather"][0]["main"] ==
-                                      "Clouds" ||
-                                  currentSky == "Rain"
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       for (int i = 0; i < 5; i++)
+                //         HourlyForecastItem(
+                //           icon: hourlyForecasts[i]["weather"][0]["main"] ==
+                //                       "Clouds" ||
+                //                   currentSky == "Rain"
+                //               ? Icons.cloud
+                //               : Icons.sunny,
+                //           temperature:
+                //               hourlyForecasts[i]["main"]["temp"].toString(),
+                //           time: hourlyForecasts[i]["dt_txt"]
+                //               .split(" ")[1]
+                //               .toString(),
+                //         )
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: hourlyForecasts.length,
+                    itemBuilder: (context, index) {
+                      final hourlyForecast = hourlyForecasts[index + 1];
+                      final hourlySky =
+                          hourlyForecasts[index + 1]["weather"][0]["main"];
+                      final hourlyTemp =
+                          hourlyForecasts[index + 1]["main"]["temp"].toString();
+                      return HourlyForecastItem(
+                          icon: hourlySky == "Clouds" || currentSky == "Rain"
                               ? Icons.cloud
                               : Icons.sunny,
-                          temperature:
-                              hourlyForecasts[i]["main"]["temp"].toString(),
-                          time: hourlyForecasts[i]["dt_txt"]
-                              .split(" ")[1]
-                              .toString(),
-                        )
-                    ],
+                          temperature: hourlyTemp,
+                          time: hourlyForecast["dt"].toString());
+                    },
                   ),
                 ),
                 const SizedBox(
