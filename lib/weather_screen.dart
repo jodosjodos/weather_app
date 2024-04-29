@@ -102,7 +102,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
           }
           final data = snapShot.data!;
           final currentWeatherData = data["list"][0];
-          final currentTemp = currentWeatherData["main"]["temp"];
+
+          final double currentTemp =
+              currentWeatherData["main"]["temp"] - 273.15;
           final currentSky = currentWeatherData["weather"][0]["main"];
           final currentPressure = currentWeatherData["main"]["pressure"];
           final currentHumidity = currentWeatherData["main"]["humidity"];
@@ -174,7 +176,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "$currentTemp K ",
+                                  "${currentTemp.toStringAsPrecision(2)} °C ",
                                   style: const TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,
@@ -245,16 +247,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         final hourlyForecast = hourlyForecasts[index + 1];
                         final hourlySky =
                             hourlyForecasts[index + 1]["weather"][0]["main"];
-                        final hourlyTemp = hourlyForecasts[index + 1]["main"]
-                                ["temp"]
-                            .toString();
+                        final double hourlyTemp =
+                            hourlyForecasts[index + 1]["main"]["temp"] - 273.15;
                         final time =
                             DateTime.parse(hourlyForecast["dt_txt"].toString());
                         return HourlyForecastItem(
                           icon: hourlySky == "Clouds" || currentSky == "Rain"
                               ? Icons.cloud
                               : Icons.sunny,
-                          temperature: hourlyTemp,
+                          temperature:
+                              "${hourlyTemp.toStringAsPrecision(2)} °C",
                           time: DateFormat.j().format(time),
                         );
                       },
