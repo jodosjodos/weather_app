@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/additional_information_item.dart';
@@ -20,11 +21,10 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   late Future<Map<String, dynamic>> weather;
-
+  String cityName = "Kigali";
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
       // city to  get weather
-      String cityName = "London";
       final res = await http.get(
         Uri.parse(
           "http://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$openWeatherAPIKey",
@@ -41,18 +41,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
     }
   }
 
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
     weather = getCurrentWeather();
   }
 
-  final border = OutlineInputBorder(
+  final border = const OutlineInputBorder(
     borderSide: BorderSide.none, // Transparent border
-    borderRadius: const BorderRadius.all(
+    borderRadius: BorderRadius.all(
       Radius.circular(12),
     ),
   );
+
+  handleSearch() {
+    final city = _controller.text.toLowerCase();
+    setState(() {
+      cityName = city;
+      weather = getCurrentWeather();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +117,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextField(
+                    controller: _controller,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
@@ -120,9 +130,27 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       border: border,
                     ),
                   ),
-                  FilledButton(
-                    onPressed: () {},
-                    child: const Text("mee"),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextButton(
+                    onPressed: handleSearch,
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        minimumSize: const Size(
+                          double.infinity,
+                          50,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            5,
+                          ),
+                        )),
+                    child: const Text("search"),
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   // main card
                   SizedBox(
