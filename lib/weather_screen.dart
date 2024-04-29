@@ -21,7 +21,7 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   late Future<Map<String, dynamic>> weather;
-  String cityName = "Kigali";
+  String cityName = "Nyabihu";
   Future<Map<String, dynamic>> getCurrentWeather() async {
     try {
       // city to  get weather
